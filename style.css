@@ -1,0 +1,74 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"] {
+  padding: 5px;
+}
+
+main button {
+  padding: 5px;
+  cursor: pointer;
+}
+
+main div {
+  margin: 50px 0px;
+}
+
+.connect-button {
+  padding: 20px;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  background-color: #4fd1c5;
+  transition: 0.3s;
+  color: white;
+  border: none;
+  outline: 0;
+}
+.connect-button:hover {
+  background-color: #38b2ac;
+  -webkit-box-shadow: 5px 6px 5px 0px rgba(191, 230, 228, 1);
+  -moz-box-shadow: 5px 6px 5px 0px rgba(191, 230, 228, 1);
+  box-shadow: 5px 6px 5px 0px rgba(191, 230, 228, 1);
+}
+
+#interface {
+  display: none;
+  text-align: center;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+}
+
+.loader {
+  display: none;
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+  margin: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
