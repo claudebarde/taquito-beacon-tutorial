@@ -16,11 +16,13 @@ const updateInnerText = (id, text) =>
   (document.getElementById(id).innerText = text);
 
 const showToast = (msg) => {
-  const toast = document.getElementById("snackbar");
+  const toast = document.getElementById("toast");
   toast.textContent = msg;
-  toast.className = "show";
   setTimeout(() => {
-    toast.className = toast.className.replace("show", "");
+    toast.className = "show";
+    setTimeout(() => {
+      toast.className = toast.className.replace("show", "");
+    }, 3000);
   }, 3000);
 };
 
@@ -30,29 +32,28 @@ const initWallet = async () => {
     // creating new Beacon wallet instance
     const options = {
       name: "Taquito Beacon Tutorial",
-      PERMISSION_REQUEST_SUCCESS: {
-        handler: async (data) => {
-          console.log("Wallet is connected:", data);
+      eventHandlers: {
+        PERMISSION_REQUEST_SUCCESS: {
+          handler: async (data) => {
+            console.log("Wallet is connected:", data);
+          },
         },
-      },
-      OPERATION_REQUEST_SENT: {
-        handler: async (data) => {
-          console.log("Request sent:", data);
-          showToast("Request sent!");
+        OPERATION_REQUEST_SENT: {
+          handler: async (data) => {
+            console.log("Request sent:", data);
+          },
         },
-      },
-      OPERATION_REQUEST_SUCCESS: {
-        // setting up the handler method will disable the default one
-        handler: async (data) => {
-          console.log("Request successful:", data);
-          showToast("Request successful!");
+        OPERATION_REQUEST_SUCCESS: {
+          handler: async (data) => {
+            console.log("Request successful:", data);
+            showToast("Request successful!");
+          },
         },
-      },
-      OPERATION_REQUEST_ERROR: {
-        // setting up the handler method will disable the default one
-        handler: async (data) => {
-          console.log("Request error:", data);
-          showToast("Request error!");
+        OPERATION_REQUEST_ERROR: {
+          handler: async (data) => {
+            console.log("Request error:", data);
+            showToast("Request error!");
+          },
         },
       },
     };
