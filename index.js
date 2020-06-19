@@ -15,11 +15,48 @@ window.onload = () => {
 const updateInnerText = (id, text) =>
   (document.getElementById(id).innerText = text);
 
+const showToast = (msg) => {
+  const toast = document.getElementById("snackbar");
+  toast.textContent = msg;
+  toast.className = "show";
+  setTimeout(() => {
+    toast.className = toast.className.replace("show", "");
+  }, 3000);
+};
+
 const initWallet = async () => {
   try {
     Tezos.setProvider({ rpc: `https://carthagenet.SmartPy.io` });
     // creating new Beacon wallet instance
-    const wallet = new BeaconWallet({ name: "Taquito Beacon Tutorial" });
+    const options = {
+      name: "Taquito Beacon Tutorial",
+      PERMISSION_REQUEST_SUCCESS: {
+        handler: async (data) => {
+          console.log("Wallet is connected:", data);
+        },
+      },
+      OPERATION_REQUEST_SENT: {
+        handler: async (data) => {
+          console.log("Request sent:", data);
+          showToast("Request sent!");
+        },
+      },
+      OPERATION_REQUEST_SUCCESS: {
+        // setting up the handler method will disable the default one
+        handler: async (data) => {
+          console.log("Request successful:", data);
+          showToast("Request successful!");
+        },
+      },
+      OPERATION_REQUEST_ERROR: {
+        // setting up the handler method will disable the default one
+        handler: async (data) => {
+          console.log("Request error:", data);
+          showToast("Request error!");
+        },
+      },
+    };
+    const wallet = new BeaconWallet(options);
     // setting up network
     const network = {
       type: "carthagenet",

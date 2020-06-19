@@ -2,6 +2,8 @@ html,
 body {
   height: 100%;
   width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
 main {
@@ -37,9 +39,9 @@ main div {
 }
 .connect-button:hover {
   background-color: #38b2ac;
-  -webkit-box-shadow: 5px 6px 5px 0px rgba(191, 230, 228, 1);
-  -moz-box-shadow: 5px 6px 5px 0px rgba(191, 230, 228, 1);
-  box-shadow: 5px 6px 5px 0px rgba(191, 230, 228, 1);
+  -webkit-box-shadow: 1px 6px 5px 0px rgba(192, 230, 228, 1);
+  -moz-box-shadow: 1px 6px 5px 0px rgba(192, 230, 228, 1);
+  box-shadow: 1px 6px 5px 0px rgba(192, 230, 228, 1);
 }
 
 #interface {
