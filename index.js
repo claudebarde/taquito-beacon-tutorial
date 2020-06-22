@@ -15,7 +15,7 @@ window.onload = () => {
 const updateInnerText = (id, text) =>
   (document.getElementById(id).innerText = text);
 
-const showToast = (msg) => {
+const showToast = msg => {
   const toast = document.getElementById("toast");
   toast.textContent = msg;
   setTimeout(() => {
@@ -34,23 +34,23 @@ const initWallet = async () => {
       name: "Taquito Beacon Tutorial",
       eventHandlers: {
         PERMISSION_REQUEST_SUCCESS: {
-          handler: async (data) => {
+          handler: async data => {
             console.log("Wallet is connected:", data);
           },
         },
         OPERATION_REQUEST_SENT: {
-          handler: async (data) => {
+          handler: async data => {
             console.log("Request sent:", data);
           },
         },
         OPERATION_REQUEST_SUCCESS: {
-          handler: async (data) => {
+          handler: async data => {
             console.log("Request successful:", data);
             showToast("Request successful!");
           },
         },
         OPERATION_REQUEST_ERROR: {
-          handler: async (data) => {
+          handler: async data => {
             console.log("Request error:", data);
             showToast("Request error!");
           },
@@ -62,10 +62,10 @@ const initWallet = async () => {
     const network = {
       type: "carthagenet",
     };
-    // setting Beacon wallet as wallet provider for Taquito
-    Tezos.setWalletProvider(wallet);
     // requesting permissions on selected network
     await wallet.requestPermissions({ network });
+    // setting Beacon wallet as wallet provider for Taquito
+    Tezos.setWalletProvider(wallet);
     // getting user's address
     userAddress = wallet.permissions.address;
     console.log("Your address:", userAddress);
@@ -74,8 +74,9 @@ const initWallet = async () => {
     // getting info from smart contract
     contractInstance = await Tezos.wallet.at(contractAddress);
     const storage = await contractInstance.storage();
-    // hides button then shows and populates contract interface
+    // hides button
     document.getElementById("connection").style.display = "none";
+    // shows and populates contract interface
     document.getElementById("interface").style.display = "block";
     updateInnerText("user-address", userAddress);
     updateInnerText("user-balance", userBalance / 1000000);
@@ -87,6 +88,7 @@ const initWallet = async () => {
 };
 
 const changeMessage = async () => {
+  // disables confirmation button
   document.getElementById("update-message").disabled = true;
   // displays loader
   document.getElementById("loader").style.display = "block";
